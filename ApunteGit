@@ -1,0 +1,71 @@
+Git-Github
+
+1. Existen 3 areas (Arquitectura de árbol)
+  - Área de trabajo(sublime)
+  - Área de Preparación (staging area)
+  - Repositorio (Github)
+
+2. Primeras configuraciones (usuario y email)
+  - Abrir terminal git bash,ejecutar:
+    * git config --global user.name "name"
+    * git config --global user.email "email"
+    * git config --global color.ui true
+  
+3. Inicializando con Git
+  - Dirigirse a la carpeta del proyecto en consola y ejecutar "git init"
+
+4. Otros Comandos
+  - git status : Muestra el estado del proyecto, archivos modificados y archivos en el staging area.
+  - git add -A : Guarda los archivos enviandolos al staging area.
+      * git add -A
+      * git add *
+      * git add .
+      * git add [nombre_archivo]
+      
+  - git commit -m "mensaje" : sube el archivo al repositorio central (Github).
+      * git commit -am "mensaje" : comandos conjuntos para agregar y subir al repositorio.
+      
+  - git log : muestra el historial de commit
+      * git log > commits.txt : genera un archivo txt con los commits realizados en el proyecto.
+      * git log --oneline --decorate --graph --all : muestra los commits con colores y en forma de grafo.
+      * git config --global alias.[nombre_alias] 'log --oneline --decorate --graph -- all' : ingresa un alias para llamar al log
+          *git nicelog
+      
+  - git checkout : permite revisar el proyecto en un estado anterior especifico, o cambiarse de rama.
+      * git checkout [id_del_commit]
+      * git checkout [nombre_rama]
+      
+  - git reset : permite volver a una versión anterior del proyecto sin poder recuperar.
+      * git reset --soft : borra una versión pero mantiene el ultimo codigo en el editor.
+      * git reset --mixed : borra la versión y lo de staging area, no lo del editor.
+      * git reset --hard : borra todo.
+      
+  *** Sólo si se guardo un txt con los commits realizados en el proyecto se puede recuperar lo borrado
+        * git reset --hard [id_del_commits]
+
+5. Ramas (Branch)
+  - Lineas alternas de tiempo.Se realiza una copia del proyecto que se encuentra en la rama master-
+  - no afecta la versión estable del proyecto guardada en la rama Master.
+  - HEAD : Punto del proyecto donde nos encontramos(Que rama)
+  - git branch [nombre_rama] : comando que crea una nueva rama.
+  - git branch : muestra las ramas existentes
+  - git branch -v :
+  - git branch -d : elimina una rama. solo si la rama fue fusionada
+  - git branch -D : elimina la rama incluso si no ha sido fusionada
+  - git branch -m : renombra una rama cuando estas posicionado en ella.
+  - git branch --merged : muestra las ramas que han sido fusionadas.
+
+6. Fusiones (merge) 
+  - comando que realiza al fusión de ramas.
+      * git merge [nombre_rama]
+  - para crear un mensaje para la fusión, presionar "o".
+  - para salir del texto ,ESC :X.
+  - cuando se fusiona sin conflicto aparece fast-forward
+  - cuando no se fusiona aparece el error CONFLICT que debe ser resulto manualmente
+      en el archivo aparecera:
+                              <<<<<<<<< HEAD
+                              ==========
+                              >>>>>>>>> [nombre_rama]
+      seleccionar la porción de código a guardar, commit y add normal.
+
+  
