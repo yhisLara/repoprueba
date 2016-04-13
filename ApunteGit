@@ -68,6 +68,72 @@ Git-Github
                               >>>>>>>>> [nombre_rama]
       seleccionar la porción de código a guardar, commit y add normal.
 
-7. Github 
-
+7. Github
+  - Workflows : flujos de trabajos en github.
+  - git clone [https or ssh] : permite clonar un repositorio de github al repositorio local
+  - git remote : enlaza servidores con areas locales, en este caso github con el area local.
+      * git remote add origin [copy_url_repository_github]
+      * git remote -v : enlaces generados via repositorio
+  - git push : permite subir los commit y archivos desde local al repositorio
+      * git push origin master : por defecto
+  - git fetch : espejea la rama master del repositorio github con la rama origin/master del repositorio local.
+  - git pull : realiza el espejeo y fusion del repositorio central con el repositorio local.
   
+  - origin y upstream : 
+  
+    /-------------------/   fork    /------------------/
+    / proyecto ajeno    / ========> / proyecto clonado /
+    /___________________/           /__________________/
+            |                                 |
+      upstream/master   ------------>   origin/master (local)
+      
+8. Deployment 
+  - subir el proyecto a una url.
+  - tiene 4 areas:
+      *Desarrollo (local)
+      *Produccion
+      *Testing (server para genarar pruebas)
+      *staging
+  - github pages : generar una url de produccion
+      - se puede generar un nuevo branch en github llamado gh-pages(deployment  automático)
+      - se genera un commit dentro de la rama gh-pages recién creada y se muestra "web site"
+          * url generada : "www.nombreusuario.github.io/nombre_del_proyecto"
+  - ssh : Protocolo de seguridad.
+      *ssh-keygen: se  genera una clave de seguridad en local
+          /users/""/.ssh/id_rsa
+          - id_rsa = llave privada
+          - id_rsa.pub = llave publica
+      - Ingresar a la carpeta ssh con el comando cat id_rsa.pub y copiar
+      - Ingresar a github y en settings aparece " ssh and gpgkeys" y crear la nueva llave.
+      - Luego se realiza la conexión via ssh al proyecto.
+          * git init, git remote , git pull ,pregunta la pass , git pull origin gh-pages.
+      - Para que los cambios se vean reflejados en la url, deben ser en gh-pages.
+      
+9. Shell script
+  - Se crea archivo sh con instrucciones git para ahorrar tiempo.
+  - #!/bin/sh ( interprete), touch , git add ,git commit , git status , echo , etc
+  - sh [nombre_archivo.sh] : permite ejeecutar el shell script.
+
+10. git hooks 
+  - Archivo sh con instrucciones pero que se ejecuta automaticamente como un trigger.
+  - Entrar en la carpeta cd .git/hooks  del proyecto, ejecutar ls para ver los hooks que existen y crear el nuevo hook
+    touch [nombre_hooks]
+  - se edita con vim [nombre_hooks]. Se agregan las instrucciones #!/bin/sh  ./git push origin master.
+  - con cat [nombre_hook] se lee el archivo y se autoriza para que se pueda ejecutar con CHMOD +X [nombre_hooks]
+  
+11. Manual Deployment
+  - Dar acceso via ssh por terminal al servidor
+  - Generar llave ssh en el servidor (ssh-keygen) , id_rsa ,etc.
+  - Copiar id_rsa.pub del servidor y crear nueva llave en github para generar la conexión entre github y el server(webfaction).
+  - Ejecutar git init , git remote con el repositorio de github, git pull (pide la pass).
+  - Desde local ...
+      - generar cambio
+      - git add -A
+      - git commit -m ""
+      - git push origin master  / cambios en github
+      
+  - desde webserver...
+      - git pull origin master
+      - ingresar pass
+  
+12. Gestión de proyectos
