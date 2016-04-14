@@ -137,3 +137,36 @@ Git-Github
       - ingresar pass
   
 12. Gestión de proyectos
+  - Wiki :  texto de colaboración
+  - issue : se activan en features en settings
+            "Tareas" a realizar del proyecto. Se le asigna un nombre, un encargado, selecciona un label, descripción y
+            puede ser asignado a un milestone (un proceso grande del proyecto)
+  - Milestone : Titulo, Descripción y fecha. un evento mayor del proyecto que puede contener issues.
+      - Confirmar un issue :
+        - Entrar a commits y seleccionar el que se desea confirmar.
+        - Click en el cliboard y se visualizael cambio efectuado.
+        - se puede realizar de dos formas:
+          - copiando la url del commit
+          - copiando el numero sha
+        - Pegarlo como comentario dentro del issue.clicj en close and comment.
+        
+13. Automatic Deployment
+  - Se utilizan hooks
+  - .git ignore : archivo escondido. 
+                  #!/bin/sh
+                  *.sh ( archivos a ignorar)
+                  
+  - touch deploy.sh : crearlo en carpeta del proyecto
+                      #!/bin/sh
+                      cd ~/webapps/"nombre_proyecto"
+                      git init, git remote, git pull
+                      
+  - hooks post-commit : #!/bin/sh
+                        git push origin master
+                        ssh [conexion_con_webserver] 'bash-s' < deploy.sh
+                        
+  - autorizar post-commit : chmod +x post-commit
+                
+
+
+
